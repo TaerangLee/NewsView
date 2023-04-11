@@ -39,9 +39,9 @@ const NewsList = () => {
   }
   return (
     <S.NewsListBlock>
-      <NewsItem article={sampleArticle} />
-      <NewsItem article={sampleArticle} />
-      <NewsItem article={sampleArticle} />
+      {articles.map((article) => (
+        <NewsItem key={article.url} article={article} />
+      ))}
     </S.NewsListBlock>
   );
 };
