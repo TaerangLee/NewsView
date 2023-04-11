@@ -3,24 +3,24 @@ import styled from "styled-components";
 import NewsItem, { Article } from "./NewsItem"; // NewsItem 컴포넌트와 Article 인터페이스를 가져옵니다.
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Category } from "../styled/Categories";
 
-const sampleArticle: Article = {
-  title: "제목",
-  description: "내용",
-  url: "https://google.com",
-  urlToImage: "https://via.placeholder.com/160",
-};
+interface NewsListProps {
+  category?: string;
+}
 
-const NewsList = () => {
-  const [articles, setArticles] = useState<Article[] | null>(null);
-  const [loading, setLoading] = useState(false);
+const NewsList = ({ category = "all" }: NewsListProps) => {
+  const [articles, setArticles] = useState<Article[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       try {
         const response = await axios.get(
-          "https://newsapi.org/v2/top-headlines?country=kr&apiKey=0a8c4202385d4ec1bb93b7e277b3c51f"
+          `https://newsapi.org/v2/top-headlines?country=kr${
+            category === "all" ? "" : `&category=${category}`
+          }&apiKey=0a8c4202385d4ec1bb93b7e277b3c51f`
         );
         setArticles(response.data.articles);
       } catch (e) {
@@ -29,13 +29,13 @@ const NewsList = () => {
       setLoading(false);
     };
     fetchData();
-  }, []);
+  }, [category]);
 
   if (loading) {
     return <S.NewsListBlock>대기 중...</S.NewsListBlock>;
   }
   if (!articles) {
-    return <></>;
+    return null;
   }
   return (
     <S.NewsListBlock>
