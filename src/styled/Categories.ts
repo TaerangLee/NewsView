@@ -27,3 +27,27 @@ export const Category = styled.div`
     margin-left: 1rem;
   }
 `;
+
+
+export interface CategoryData {
+  name: string;
+  text: string;
+}
+
+interface CategoriesProps {
+  onSelect: (category: string) => void;
+  activeCategory: string;
+  categories: CategoryData[];
+}
+
+const Categories = ({
+  onSelect,
+  activeCategory,
+  categories,
+}: CategoriesProps) => {
+  return (
+    
+  );
+};
+
+export default Categories;

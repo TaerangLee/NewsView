@@ -10,8 +10,6 @@ export interface Article {
 }
 // Article이라는 인터페이스 안에서 4가지의 속성을 가지게 되어 interface안에 정의를 하게 된다.
 
-//NewsItemProps라는 인터페이스는 article속성은 Article 인터페이스에서 정의한 속성을 가진다.
-
 const NewsItem = ({ article }: { article: Article }) => {
   //NewsItemProps라는 interface를 가져오게 됨
   const { title, description, url, urlToImage } = article;

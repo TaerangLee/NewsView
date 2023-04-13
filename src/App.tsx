@@ -12,7 +12,7 @@ interface CategoriesProps {
 }
 
 interface NewsListProps {
-  category?: string;
+  category: string;
 }
 
 function App(props: AppProps) {
@@ -24,7 +24,6 @@ function App(props: AppProps) {
     <>
       <Categories category={category} onSelect={onSelect} />
       <NewsList category={category} />
-      <NewsList />
     </>
   );
 }
