@@ -11,6 +11,12 @@ export const CategoriesBlock = styled.div`
   } ;
 `;
 
+export interface CategoryProps {
+  active?: boolean;
+  onClick: () => void;
+  children: string;
+}
+
 export const Category = styled.div`
   font-size: 1.125rem;
   cursor: pointer;
@@ -28,7 +34,6 @@ export const Category = styled.div`
   }
 `;
 
-
 export interface CategoryData {
   name: string;
   text: string;
@@ -40,14 +45,19 @@ interface CategoriesProps {
   categories: CategoryData[];
 }
 
-const Categories = ({
-  onSelect,
-  activeCategory,
-  categories,
-}: CategoriesProps) => {
+const Categories = ({ onSelect, categories }: CategoriesProps) => {
   return (
-    
+    <CategoriesBlock>
+      {categories.map((category) => (
+        <Category
+          key={category.name}
+          // active={category.name === category.name}
+          onClick={() => onSelect(category.name)}
+        >
+          {category.text}
+        </Category>
+      ))}
+    </CategoriesBlock>
   );
 };
-
 export default Categories;

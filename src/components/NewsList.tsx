@@ -17,6 +17,7 @@ const NewsList = ({ category = "all" }: NewsListProps) => {
     const fetchData = async () => {
       setLoading(true);
       try {
+        const query = category === "all" ? "" : `&category=${category}`;
         const response = await axios.get(
           `https://newsapi.org/v2/top-headlines?country=kr${
             category === "all" ? "" : `&category=${category}`
